@@ -1,9 +1,9 @@
-# RoboticaProjFinal
+# Projeto Final de Robótica
 
-## Membros:
+# Membros:
 
-Hugo Mendes
+## Hugo Mendes
 
-Jean Luca
+## Jean Luca
 
-Pedro de la Peña
+## Pedro de la Peña
