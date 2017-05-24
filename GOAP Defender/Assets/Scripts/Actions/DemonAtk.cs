@@ -16,6 +16,7 @@ public class DemonAtk : GoapAction {
     {
         gego = gameObject.GetComponent<GenericGOAP>();
         oldCost = cost;
+
     }
 
     public DemonAtk()
@@ -53,17 +54,22 @@ public class DemonAtk : GoapAction {
         foreach (string name in targetsDist.Keys)
         {
             GameObject temp = gego.lib.Way[name].gameObject;
-            if (targetsDist[name] < dist && (temp.tag.Equals("NPC") || temp.tag.Equals("Door")))
+            if (targetsDist[name] < dist && (temp.tag.Equals("NPC") || temp.tag.Equals("Door")) && temp.gameObject.activeInHierarchy)
             {
                 dist = targetsDist[name];
                 soldier = temp.GetComponentInParent<Labourer>();
-                print(targetsDist[name] + " - " + dist);
+                print(dist + " - " + name);
+                print(targetsDist["doorR"]);
             }
         }
 
         cost += (distFactor * dist) / 500;
 
-        target = soldier.gameObject;
+        if (soldier == null)
+        {
+            return false;
+        }
+        target = soldier.transform.FindChild("waypoint").gameObject;
 
         if(soldier.hp <= 0 || dist == 999f)
         {
@@ -75,12 +81,13 @@ public class DemonAtk : GoapAction {
 
     public override bool perform(GameObject agent)
     {
-        print("Bati");
-
-            startTime = Time.time;
         if (startTime == 0)
+        {
+            startTime = Time.time;
             workDuration = 1 / gameObject.GetComponent<Labourer>().atkSpeed;
             soldier.decreaseHp(1);
+            print("Bati");
+        }
 
         if (Time.time - startTime > workDuration)
         {

@@ -54,7 +54,7 @@ public class GenericGOAP : MonoBehaviour {
         }
     }
 
-    public Dictionary<string,float> getObjectsDist(){
+    public Dictionary<string,float> getObjectsDist(){ //to-do: make this sh%$ work!
         Dictionary<string, float> dic = new Dictionary<string, float>();
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         NavMeshPath path = new NavMeshPath();
@@ -65,6 +65,8 @@ public class GenericGOAP : MonoBehaviour {
             NavMesh.CalculatePath(transform.position, trans.position, agent.areaMask, path);
             agent.SetPath(path);
             dic.Add(key, agent.remainingDistance);
+            print(" key:" + key + " - " + agent.remainingDistance);
+            print(agent.path.corners.Length);
         }
         agent.path = oldPath;
         return dic;

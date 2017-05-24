@@ -16,7 +16,7 @@ public class PathFind : MonoBehaviour {
 	void Start () {
         me = gameObject.GetComponent<NavMeshAgent>();
         //line = this.GetComponent<LineRenderer>();
-        ChangeDoor(lib.door["DoorD"], true);
+        //ChangeDoor(lib.door["DoorD"], true);
     }
 	
 	// Update is called once per frame

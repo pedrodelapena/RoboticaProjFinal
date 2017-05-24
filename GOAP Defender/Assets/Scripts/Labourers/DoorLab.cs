@@ -16,13 +16,11 @@ public class DoorLab : Labourer {
     {
         if (hp <= 0)
         {
-            gameObject.SetActive(false);
-            god.doorStates[DoorId] = false;
+            god.breakDoor(DoorId);
         }
         else
         {
-            gameObject.SetActive(true);
-            god.doorStates[DoorId] = true;
+            god.fixDoor(DoorId);
         }
     }
 

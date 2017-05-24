@@ -11,7 +11,7 @@ using System.Collections.Generic;
  */
 public abstract class Labourer : MonoBehaviour, IGoap
 {
-    GenericGOAP gego;
+    public GenericGOAP gego;
     public float atkSpeed;
     public int hp;
 
@@ -84,9 +84,10 @@ public abstract class Labourer : MonoBehaviour, IGoap
         gego.goTo(nextAction.target.transform);
         gego.setSpeed(moveSpeed);
 		
-		if (gameObject.transform.position.Equals(nextAction.target.transform.position) ) {
+		if (gameObject.transform.position.x == nextAction.target.transform.position.x && gameObject.transform.position.z == nextAction.target.transform.position.z) {
 			// we are at the target location, we are done
 			nextAction.setInRange(true);
+            print("<Color=blue>Got in Range</color>");
 			return true;
 		} else
 			return false;

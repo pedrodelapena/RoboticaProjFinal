@@ -6,11 +6,9 @@ public class BS_GOAP : Labourer {
 
     public Library lib;
 
-    GenericGOAP gego;
-
 
 	void Start () {
-        gego = this.GetComponent<GenericGOAP>();
+        //gego = this.GetComponent<GenericGOAP>();
         //StartCoroutine(teste());
 	}
 	
@@ -20,10 +18,7 @@ public class BS_GOAP : Labourer {
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            gego.goToClosestIteractible();
-        }
+
     }
 
     public override HashSet<KeyValuePair<string, object>> createGoalState()
