@@ -6,9 +6,11 @@ public class Library : MonoBehaviour {
 
     public Transform[] Waypoints;
     public Dictionary<string, Transform> Way;
+    public Dictionary<string, GameObject> Interactibles;
+    public Dictionary<string, GameObject> Attackables;
     public Dictionary<string, int> door;
 
-    void Start () {
+    void Awake () {
         Way = new Dictionary<string, Transform>();
 
         Way.Add("anvil", Waypoints[0]);
@@ -24,6 +26,7 @@ public class Library : MonoBehaviour {
         Way.Add("doorL", Waypoints[10]);
         Way.Add("doorD", Waypoints[11]);
         Way.Add("cross", Waypoints[12]);
+        Way.Add("Blacksmith", Waypoints[13]);
 
         door = new Dictionary<string, int>();
 
@@ -31,6 +34,10 @@ public class Library : MonoBehaviour {
         door.Add("DoorU", 1);
         door.Add("DoorR", 2);
         door.Add("DoorD", 3);
+    }
+    void Start()
+    {
+
     }
 	
 	// Update is called once per frame
