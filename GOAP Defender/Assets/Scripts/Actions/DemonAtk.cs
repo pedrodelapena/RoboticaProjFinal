@@ -79,9 +79,10 @@ public class DemonAtk : GoapAction {
 
             startTime = Time.time;
         if (startTime == 0)
+        {
             workDuration = 1 / gameObject.GetComponent<Labourer>().atkSpeed;
             soldier.decreaseHp(1);
-
+        }
         if (Time.time - startTime > workDuration)
         {
             atacked = true;

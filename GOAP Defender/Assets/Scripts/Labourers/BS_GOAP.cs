@@ -29,7 +29,7 @@ public class BS_GOAP : Labourer {
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
         HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
-        goal.Add(new KeyValuePair<string, object>("Damage door", true));
+        goal.Add(new KeyValuePair<string, object>("Damage door", true)); //??????????????
         return goal;
     }
     /*

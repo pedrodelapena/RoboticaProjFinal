@@ -38,10 +38,9 @@ public abstract class Labourer : MonoBehaviour, IGoap
 	public HashSet<KeyValuePair<string,object>> getWorldState () {
 		HashSet<KeyValuePair<string,object>> worldData = new HashSet<KeyValuePair<string,object>> ();
         /*
-		worldData.Add(new KeyValuePair<string, object>("hasOre", (backpack.numOre > 0) ));
-		worldData.Add(new KeyValuePair<string, object>("hasLogs", (backpack.numLogs > 0) ));
-		worldData.Add(new KeyValuePair<string, object>("hasFirewood", (backpack.numFirewood > 0) ));
-		worldData.Add(new KeyValuePair<string, object>("hasTool", (backpack.tool != null) ));
+		worldData.Add(new KeyValuePair<string, object>("hasResources", (backpack.numOre > 0) ));
+		worldData.Add(new KeyValuePair<string, object>("hasDors", (backpack.numLogs > 0) ));
+		worldData.Add(new KeyValuePair<string, object>("hasWeapon", (backpack.numFirewood > 0) ));
         */
 		return worldData;
 	}
