@@ -27,10 +27,10 @@ public class PathFind : MonoBehaviour {
         plotLine();
     }
 
-    void ChangeDoor(int door, bool open)
+    public void ChangeDoor(int door)
     {
         int value = (int)Mathf.Pow(2, door + 3);
-        me.areaMask += open? value:-value;
+        me.areaMask = me.areaMask ^ value;
         //area mask works by converting the int value to binary and using it as bolleans for each layer on the NavMeshAgent AreaMaks componnent.
     }
 

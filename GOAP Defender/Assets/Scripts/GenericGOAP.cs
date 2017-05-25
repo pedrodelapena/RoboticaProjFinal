@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GenericGOAP : MonoBehaviour {
 
-    PathFind pf;
+    public PathFind pf;
     public Library lib;
     public bool inPlace;
 
@@ -54,21 +54,31 @@ public class GenericGOAP : MonoBehaviour {
         }
     }
 
-    public Dictionary<string,float> getObjectsDist(){ //to-do: make this sh%$ work!
+    public Dictionary<string,float> getObjectsDist(){
         Dictionary<string, float> dic = new Dictionary<string, float>();
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         NavMeshPath path = new NavMeshPath();
-        NavMeshPath oldPath = agent.path;
+        Vector3 lastPos = new Vector3(0,0,0);
         foreach (string key in lib.Way.Keys)
         {
             Transform trans = lib.Way[key];
             NavMesh.CalculatePath(transform.position, trans.position, agent.areaMask, path);
-            agent.SetPath(path);
-            dic.Add(key, agent.remainingDistance);
-            print(" key:" + key + " - " + agent.remainingDistance);
-            print(agent.path.corners.Length);
+            float dist = 0f;
+            if (path.corners.Length == 1)
+            {
+                dist = Vector3.Distance(transform.position, trans.position);
+                lastPos = path.corners[0];
+            }
+            else
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                dist += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+                lastPos = path.corners[i + 1];
+                //print("Somando" + dist);
+            }
+            dic.Add(key, (lastPos.x == trans.position.x && lastPos.z == trans.position.z) ? dist : 999);
+            //print(path.corners.Length);
         }
-        agent.path = oldPath;
         return dic;
     }
 }

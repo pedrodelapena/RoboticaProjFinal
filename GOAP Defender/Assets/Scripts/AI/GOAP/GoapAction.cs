@@ -7,17 +7,22 @@ public abstract class GoapAction : MonoBehaviour {
 
 	private HashSet<KeyValuePair<string,object>> preconditions;
 	private HashSet<KeyValuePair<string,object>> effects;
+    public static God god;
 
 	private bool inRange = false;
 
 	/* The cost of performing the action. 
 	 * Figure out a weight that suits the action. 
 	 * Changing it will affect what actions are chosen during planning.*/
-	public float cost = 1f;
+	public float cost;
 
 	/**
 	 * An action often has to perform on an object. This is that object. Can be null. */
 	public GameObject target;
+    void Awake()
+    {
+        god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
+    }
 
 	public GoapAction() {
 		preconditions = new HashSet<KeyValuePair<string, object>> ();

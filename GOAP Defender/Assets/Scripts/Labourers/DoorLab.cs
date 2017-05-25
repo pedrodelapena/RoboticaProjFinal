@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DoorLab : Labourer {
 
-    public God god;
     public int DoorId;
 
     void Awake()
     {
         hp = 10;
+        //god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
     }
 
     void Update()

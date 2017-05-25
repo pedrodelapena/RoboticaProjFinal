@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\AI\GOAP\GoapPlanner.cs" />
     <Compile Include="Assets\Scripts\AI\GOAP\IGoap.cs" />
     <Compile Include="Assets\Scripts\Actions\DemonAtk.cs" />
+    <Compile Include="Assets\Scripts\Actions\GetCross.cs" />
     <Compile Include="Assets\Scripts\GenericGOAP.cs" />
     <Compile Include="Assets\Scripts\God.cs" />
     <Compile Include="Assets\Scripts\Labourers\BS_GOAP.cs" />

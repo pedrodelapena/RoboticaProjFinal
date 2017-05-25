@@ -6,6 +6,7 @@ public class God : MonoBehaviour {
 
     public GameObject[] doors;
     public bool[] doorStates;
+    public float distFactor;
     void Awake()
     {
         doorStates = new bool[] { true, true, true, true };
@@ -23,11 +24,19 @@ public class God : MonoBehaviour {
     {
         doors[door].SetActive(false);
         doorStates[door] = false;
+        print("Door " + door + " broke!!!");
     } 
     public void fixDoor(int door)
     {
         doors[door].SetActive(true);
         doorStates[door] = true;
+        //print("Door " + door + " is fixed!!!");
+    }
+
+    public void loseGame()
+    {
+        print("<color=red> PEDEU!!!!!!!!!!!!!!!!!!!! </color>");
+        Application.Quit();
     }
 
 }

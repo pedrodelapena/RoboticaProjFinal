@@ -9,20 +9,20 @@ public class DemonAtk : GoapAction {
 
     private float startTime = 0;
     public float workDuration = 0; // seconds
-    public float distFactor = 100;
-    float oldCost;
+    public float oldCost;
 
     void Awake()
     {
+        god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
         gego = gameObject.GetComponent<GenericGOAP>();
         oldCost = cost;
-
     }
 
     public DemonAtk()
     {
         addEffect("Damage door", true);
-        cost = 5;
+        addEffect("Free path", true);
+
     }
 
 
@@ -50,7 +50,7 @@ public class DemonAtk : GoapAction {
         // find the nearest chopping block that we can chop our wood at
 
         Dictionary<string, float> targetsDist = gego.getObjectsDist();
-        float dist = 999f;
+        float dist = 800f;
         foreach (string name in targetsDist.Keys)
         {
             GameObject temp = gego.lib.Way[name].gameObject;
@@ -58,25 +58,20 @@ public class DemonAtk : GoapAction {
             {
                 dist = targetsDist[name];
                 soldier = temp.GetComponentInParent<Labourer>();
-                print(dist + " - " + name);
-                print(targetsDist["doorR"]);
+
             }
         }
 
-        cost += (distFactor * dist) / 500;
+        cost = oldCost + (god.distFactor * dist) / 300;
 
         if (soldier == null)
-        {
             return false;
-        }
         target = soldier.transform.FindChild("waypoint").gameObject;
 
-        if(soldier.hp <= 0 || dist == 999f)
-        {
+        if(soldier.hp <= 0 || dist > 900f)
             return false;
-        }
 
-        return target != null;
+        return true; 
     }
 
     public override bool perform(GameObject agent)
@@ -86,13 +81,19 @@ public class DemonAtk : GoapAction {
             startTime = Time.time;
             workDuration = 1 / gameObject.GetComponent<Labourer>().atkSpeed;
             soldier.decreaseHp(1);
-            print("Bati");
+            print(gameObject.name + " Bateu no " + soldier.name);
+            if(soldier.hp <= 0)
+            {
+                atacked = true;
+                if (soldier.gameObject.tag.Equals("Door"))
+                    god.breakDoor(soldier.gameObject.GetComponent<DoorLab>().DoorId);
+                return true;
+            }
+            //print(Effects.GetObjectData);
         }
 
         if (Time.time - startTime > workDuration)
-        {
-            atacked = true;
-        }
+            return false;
         return true;
     }
 }
