@@ -87,6 +87,8 @@
     <Compile Include="Assets\Scripts\Actions\GatherLog.cs" />
     <Compile Include="Assets\Scripts\Actions\GatherOre.cs" />
     <Compile Include="Assets\Scripts\Actions\GetCross.cs" />
+    <Compile Include="Assets\Scripts\Actions\GetOreBox.cs" />
+    <Compile Include="Assets\Scripts\Actions\GetWoodBox.cs" />
     <Compile Include="Assets\Scripts\GenericGOAP.cs" />
     <Compile Include="Assets\Scripts\God.cs" />
     <Compile Include="Assets\Scripts\Labourers\BS_GOAP.cs" />

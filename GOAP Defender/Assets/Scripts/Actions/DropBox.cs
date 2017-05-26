@@ -53,7 +53,7 @@ public class DropBox : GoapAction {
         Dictionary<string, float> targetsDist = gego.getObjectsDist();
         float dist = targetsDist["chest"];
 
-        cost = oldCost + ((god.distFactor * dist) / 100 ) - (40 - god.ore - god.wood) / 10;
+        cost = oldCost + ((god.distFactor * dist) / 100 ) - (40 - god.ore - god.wood) / 40;
         
         if (chest == null)
             return false;

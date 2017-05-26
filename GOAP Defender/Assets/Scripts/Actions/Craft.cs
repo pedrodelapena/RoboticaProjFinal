@@ -8,6 +8,7 @@ public class Craft : GoapAction {
     private bool crafted = false;
     private GameObject anvil; // who we aim at
     private GenericGOAP gego;
+    BS_GOAP blackSmithDude;
 
     private float startTime = 0;
     public float workDuration; // seconds
@@ -19,6 +20,10 @@ public class Craft : GoapAction {
         god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
         gego = gameObject.GetComponent<GenericGOAP>();
         oldCost = cost;
+        blackSmithDude = gameObject.GetComponent<BS_GOAP>();
+    }
+    void Start()
+    {
         anvil = gego.lib.Way["anvil"].gameObject;
     }
 
@@ -70,21 +75,22 @@ public class Craft : GoapAction {
         {
             startTime = Time.time;
             print(gameObject.name + " tentou craftar ");
-            if (god.wood <= 3 || god.ore <= 3)
+            if (blackSmithDude.wood <= 3 || blackSmithDude.ore <= 3)
             {  
                 return false;
             }
             else
             {
-                god.wood -= 3;
-                god.ore -= 3;
+                blackSmithDude.wood -= 3;
+                blackSmithDude.ore -= 3;
             }
         }
 
         if (Time.time - startTime > workDuration)
         {
-            god.tools["sword"] += 1;
+            god.Sword += 1;
             crafted = true;
+            print("<color=green>" + gameObject.name + " made a sword.  </color>");
         }
 
         return true;

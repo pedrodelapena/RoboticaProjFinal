@@ -8,6 +8,7 @@ public class God : MonoBehaviour {
     public bool[] doorStates;
     public float distFactor;
     public Dictionary<string,int> tools;
+    public int Sword = 0;
     public int wood;
     public int ore;
 

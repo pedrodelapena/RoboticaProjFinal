@@ -21,11 +21,13 @@ public class GatherLog : GoapAction {
         god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
         gego = gameObject.GetComponent<GenericGOAP>();
         oldCost = cost;
+        blackSmithDude = gameObject.GetComponent<BS_GOAP>();
     }
 
     public GatherLog()
     {
         addEffect("Has wood", true);
+        addPrecondition("Has wood", false);
     }
 
 
@@ -70,7 +72,7 @@ public class GatherLog : GoapAction {
         {
             startTime = Time.time;
             print(gameObject.name + " foi cata madeira ");
-            if (blackSmithDude.wood > blackSmithDude.backPackSize)
+            if (blackSmithDude.wood >= blackSmithDude.backPackSize)
             {
                 got = true;
                 return true;

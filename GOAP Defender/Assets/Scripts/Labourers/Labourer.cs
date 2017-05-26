@@ -14,7 +14,7 @@ public abstract class Labourer : MonoBehaviour, IGoap
     public GenericGOAP gego;
     public float atkSpeed;
     public int hp;
-    public static God god;
+    public static God god;  
 
 	public float moveSpeed = 1;
 
@@ -41,6 +41,15 @@ public abstract class Labourer : MonoBehaviour, IGoap
 	public HashSet<KeyValuePair<string,object>> getWorldState () {
 		HashSet<KeyValuePair<string,object>> worldData = new HashSet<KeyValuePair<string,object>> ();
         worldData.Add(new KeyValuePair<string, object>("Free path", (!god.doorStates[0] || !god.doorStates[1] || !god.doorStates[2] || !god.doorStates[3])));
+        worldData.Add(new KeyValuePair<string, object>("Wood in box", god.wood > 0));
+        worldData.Add(new KeyValuePair<string, object>("Ore in box", god.ore > 0));
+        if (gameObject.GetComponent<BS_GOAP>())
+        {
+            BS_GOAP bs = gameObject.GetComponent<BS_GOAP>();
+            worldData.Add(new KeyValuePair<string, object>("Has ore", bs.ore >= bs.backPackSize));
+            worldData.Add(new KeyValuePair<string, object>("Has wood", bs.wood >= bs.backPackSize));
+        }
+
         //print((!god.doorStates[0] || !god.doorStates[1] || !god.doorStates[2] || !god.doorStates[3]) + "!!!!");
 
         /*
@@ -75,6 +84,7 @@ public abstract class Labourer : MonoBehaviour, IGoap
 	public void actionsFinished ()
 	{
 		// Everything is done, we completed our actions for this gool. Hooray!
+
 		Debug.Log ("<color=blue>Actions completed</color>");
 	}
 
@@ -89,7 +99,8 @@ public abstract class Labourer : MonoBehaviour, IGoap
     }
 
 	public bool moveAgent(GoapAction nextAction) {
-		// move towards the NextAction's target
+        // move towards the NextAction's target
+        gameObject.GetComponent<GoapAgent>().createIdleState();
         gego.goTo(nextAction.target.transform);
         gego.setSpeed(moveSpeed);
 		

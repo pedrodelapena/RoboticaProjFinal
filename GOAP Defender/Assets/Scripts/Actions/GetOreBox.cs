@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatherOre : GoapAction {
+public class GetOreBox : GoapAction {
 
-    private bool got = false;
-    private Transform mine; // who we aim at
+
+    private bool picked = false;
+    private Transform chest; // who we aim at
     private GenericGOAP gego;
     private BS_GOAP blackSmithDude;
 
@@ -23,16 +24,15 @@ public class GatherOre : GoapAction {
         blackSmithDude = gameObject.GetComponent<BS_GOAP>();
     }
 
-    public GatherOre()
+    public GetOreBox()
     {
         addEffect("Has ore", true);
-        addPrecondition("Has ore", false);
+        addPrecondition("Ore in box",true);
     }
-
 
     public override void reset()
     {
-        got = false;
+        picked = false;
         startTime = 0;
         cost = oldCost;
 
@@ -40,7 +40,7 @@ public class GatherOre : GoapAction {
 
     public override bool isDone()
     {
-        return got;
+        return picked;
     }
 
     public override bool requiresInRange()
@@ -53,14 +53,14 @@ public class GatherOre : GoapAction {
         // find the nearest chopping block that we can chop our wood at
 
         Dictionary<string, float> targetsDist = gego.getObjectsDist();
-        float dist = targetsDist["mineU"] < targetsDist["mineD"] ? targetsDist["mineU"] : targetsDist["mineD"];
-        mine = targetsDist["mineU"] < targetsDist["mineD"] ? gego.lib.Way["mineU"] : gego.lib.Way["mineD"];
+        float dist = targetsDist["chest"];
+        chest = gego.lib.Way["chest"];
 
-        cost = oldCost + (god.distFactor * dist) / 300 + god.ore;
+        cost = oldCost + ((god.distFactor * dist) / 100) - (god.ore) / 10;
 
-        if (mine == null)
+        if (chest == null)
             return false;
-        target = mine.gameObject;
+        target = chest.gameObject;
 
         return true;
     }
@@ -70,17 +70,18 @@ public class GatherOre : GoapAction {
         if (startTime == 0)
         {
             startTime = Time.time;
-            print(gameObject.name + " foi cata ferro");
-            if (blackSmithDude.ore >= blackSmithDude.backPackSize)
+            print(gameObject.name + " pegou stuffs on the caixa");
+            if (blackSmithDude.ore >= 10 || god.ore <= 0)
             {
-                got = true;
-                return true;
+                picked = blackSmithDude.ore > 2;
+                return false;
             }
         }
 
         if (Time.time - startTime > workDuration)
         {
             blackSmithDude.ore += 1;
+            god.ore -= 1;
             return false;
         }
 

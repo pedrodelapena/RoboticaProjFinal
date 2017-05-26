@@ -21,7 +21,8 @@ public class DemonAtk : GoapAction
 
     public DemonAtk()
     {
-        addEffect("Damage door", true);
+
+
         addEffect("Free path", true);
 
     }
