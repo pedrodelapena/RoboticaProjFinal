@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemonAtk : GoapAction {
+public class DemonAtk : GoapAction
+{
     private bool atacked = false;
     private Labourer soldier; // who we aim at
     private GenericGOAP gego;
@@ -32,7 +33,7 @@ public class DemonAtk : GoapAction {
         soldier = null;
         startTime = 0;
         cost = oldCost;
-        
+
     }
 
     public override bool isDone()
@@ -68,10 +69,10 @@ public class DemonAtk : GoapAction {
             return false;
         target = soldier.transform.FindChild("waypoint").gameObject;
 
-        if(soldier.hp <= 0 || dist > 900f)
+        if (soldier.hp <= 0 || dist > 900f)
             return false;
 
-        return true; 
+        return true;
     }
 
     public override bool perform(GameObject agent)
@@ -82,7 +83,7 @@ public class DemonAtk : GoapAction {
             workDuration = 1 / gameObject.GetComponent<Labourer>().atkSpeed;
             soldier.decreaseHp(1);
             print(gameObject.name + " Bateu no " + soldier.name);
-            if(soldier.hp <= 0)
+            if (soldier.hp <= 0)
             {
                 atacked = true;
                 if (soldier.gameObject.tag.Equals("Door"))

@@ -81,11 +81,16 @@
     <Compile Include="Assets\Scripts\AI\GOAP\GoapAgent.cs" />
     <Compile Include="Assets\Scripts\AI\GOAP\GoapPlanner.cs" />
     <Compile Include="Assets\Scripts\AI\GOAP\IGoap.cs" />
+    <Compile Include="Assets\Scripts\Actions\Craft.cs" />
     <Compile Include="Assets\Scripts\Actions\DemonAtk.cs" />
+    <Compile Include="Assets\Scripts\Actions\DropBox.cs" />
+    <Compile Include="Assets\Scripts\Actions\GatherLog.cs" />
+    <Compile Include="Assets\Scripts\Actions\GatherOre.cs" />
     <Compile Include="Assets\Scripts\Actions\GetCross.cs" />
     <Compile Include="Assets\Scripts\GenericGOAP.cs" />
     <Compile Include="Assets\Scripts\God.cs" />
     <Compile Include="Assets\Scripts\Labourers\BS_GOAP.cs" />
+    <Compile Include="Assets\Scripts\Labourers\Demon_GOAP.cs" />
     <Compile Include="Assets\Scripts\Labourers\DoorLab.cs" />
     <Compile Include="Assets\Scripts\Labourers\Labourer.cs" />
     <Compile Include="Assets\Scripts\Library.cs" />

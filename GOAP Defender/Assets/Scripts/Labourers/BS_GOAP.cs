@@ -7,6 +7,9 @@ public class BS_GOAP : Labourer {
     public Library lib;
 
     public bool[] lastDoorState;
+    public int wood;
+    public int ore;
+    public int backPackSize;
 
 
 	void Start () {
@@ -14,6 +17,7 @@ public class BS_GOAP : Labourer {
         //StartCoroutine(teste());
         //god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
         lastDoorState = new bool[] { true, true, true, true };
+        
     }
 	
 	void Update () {
@@ -30,25 +34,19 @@ public class BS_GOAP : Labourer {
                 gego.pf.ChangeDoor(i);
             }
         }
+        if(hp <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
 
-        getWorldState();
     }
 
     public override HashSet<KeyValuePair<string, object>> createGoalState()
     {
         HashSet<KeyValuePair<string, object>> goal = new HashSet<KeyValuePair<string, object>>();
-        goal.Add(new KeyValuePair<string, object>("Damage door", true));
-        goal.Add(new KeyValuePair<string, object>("Get cross", true));
-        goal.Add(new KeyValuePair<string, object>("Free path", true));
-        //goal.Add(new KeyValuePair<string, object>("Stay alive", true));
+        goal.Add(new KeyValuePair<string, object>("Make tools", true));
+        //goal.Add(new KeyValuePair<string, object>("Stay Alive", true));
+        //goal.Add(new KeyValuePair<string, object>("Free path", false));
         return goal;
     }
-    /*
-    IEnumerator teste()
-    {
-        gego.goTo(lib.Way["treeD"]);
-        yield return new WaitUntil(() => gego.inPlace);
-        print("cheguei");
-    }
-    */
 }

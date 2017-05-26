@@ -59,12 +59,12 @@ public sealed class GoapAgent : MonoBehaviour {
 		return currentActions.Count > 0;
 	}
 
-	private void createIdleState() {
+	public void createIdleState() {
 		idleState = (fsm, gameObj) => {
 			// GOAP planning
 
 			// get the world state and the goal we want to plan for
-			HashSet<KeyValuePair<string,object>> worldState = dataProvider.getWorldState();
+			HashSet<KeyValuePair<string,object>> worldState = gameObject.GetComponent<Labourer>().getWorldState();
 			HashSet<KeyValuePair<string,object>> goal = dataProvider.createGoalState();
 
 			// Plan

@@ -22,6 +22,7 @@ public abstract class Labourer : MonoBehaviour, IGoap
     {
         gego = GetComponent<GenericGOAP>();
         god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
+        
     }
 	void Start ()
 	{
@@ -32,7 +33,7 @@ public abstract class Labourer : MonoBehaviour, IGoap
 	void Update ()
 	{
 
-	}
+    }
 
 	/**
 	 * Key-Value data that will feed the GOAP actions and system while planning.
@@ -40,7 +41,7 @@ public abstract class Labourer : MonoBehaviour, IGoap
 	public HashSet<KeyValuePair<string,object>> getWorldState () {
 		HashSet<KeyValuePair<string,object>> worldData = new HashSet<KeyValuePair<string,object>> ();
         worldData.Add(new KeyValuePair<string, object>("Free path", (!god.doorStates[0] || !god.doorStates[1] || !god.doorStates[2] || !god.doorStates[3])));
-        print((!god.doorStates[0] || !god.doorStates[1] || !god.doorStates[2] || !god.doorStates[3]) + "!!!!");
+        //print((!god.doorStates[0] || !god.doorStates[1] || !god.doorStates[2] || !god.doorStates[3]) + "!!!!");
 
         /*
 		worldData.Add(new KeyValuePair<string, object>("hasOre", (backpack.numOre > 0) ));
@@ -62,8 +63,7 @@ public abstract class Labourer : MonoBehaviour, IGoap
         // Not handling this here since we are making sure our goals will always succeed.
         // But normally you want to make sure the world state has changed before running
         // the same goal again, or else it will just fail.
-        getWorldState();
-        print("FAIOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+
 	}
 
 	public void planFound (HashSet<KeyValuePair<string, object>> goal, Queue<GoapAction> actions)
@@ -84,7 +84,9 @@ public abstract class Labourer : MonoBehaviour, IGoap
 		// Take note of what happened and make sure if you run the same goal again
 		// that it can succeed.
 		Debug.Log ("<color=red>Plan Aborted</color> "+GoapAgent.prettyPrint(aborter));
-	}
+        gameObject.GetComponent<GoapAgent>().createIdleState();
+        //print("FAIOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    }
 
 	public bool moveAgent(GoapAction nextAction) {
 		// move towards the NextAction's target

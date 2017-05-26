@@ -7,9 +7,17 @@ public class God : MonoBehaviour {
     public GameObject[] doors;
     public bool[] doorStates;
     public float distFactor;
+    public Dictionary<string,int> tools;
+    public int wood;
+    public int ore;
+
     void Awake()
     {
         doorStates = new bool[] { true, true, true, true };
+        tools = new Dictionary<string, int>();
+        tools.Add("Bow", 0);
+        tools.Add("Sword", 0);
+        tools.Add("spears", 0);
     }
 
 	void Start () {
@@ -24,7 +32,7 @@ public class God : MonoBehaviour {
     {
         doors[door].SetActive(false);
         doorStates[door] = false;
-        print("Door " + door + " broke!!!");
+        //print("Door " + door + " broke!!!");
     } 
     public void fixDoor(int door)
     {
