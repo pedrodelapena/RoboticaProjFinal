@@ -64,7 +64,7 @@ public class GetCross : GoapAction {
 
 
         cost = oldCost + (god.distFactor * dist) / 300;
-        print(cost + "meeeeeeeeeeeee");
+        //print(cost + "meeeeeeeeeeeee");
 
         if (cross == null)
             return false;

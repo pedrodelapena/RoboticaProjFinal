@@ -86,9 +86,9 @@ public class DemonAtk : GoapAction
             print(gameObject.name + " Bateu no " + soldier.name);
             if (soldier.hp <= 0)
             {
-                atacked = true;
                 if (soldier.gameObject.tag.Equals("Door"))
                     god.breakDoor(soldier.gameObject.GetComponent<DoorLab>().DoorId);
+                    atacked = true;
                 return true;
             }
             //print(Effects.GetObjectData);

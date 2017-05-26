@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.AI;
 
 
 public sealed class GoapAgent : MonoBehaviour {
@@ -87,6 +88,33 @@ public sealed class GoapAgent : MonoBehaviour {
 
 		};
 	}
+    private float checkDist(Vector3 pos)
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        NavMeshPath path = new NavMeshPath();
+        Vector3 lastPos = new Vector3(0, 0, 0);
+        NavMesh.CalculatePath(transform.position, pos, agent.areaMask, path);
+        float dist = 0f;
+            if (path.corners.Length == 1)
+            {
+                dist = Vector3.Distance(transform.position, pos);
+                lastPos = path.corners[0];
+            }
+            else
+                for (int i = 0; i < path.corners.Length - 1; i++)
+                {
+                    dist += Vector3.Distance(path.corners[i], path.corners[i + 1]);
+                    lastPos = path.corners[i + 1];
+                }
+            if(lastPos.x == pos.x && lastPos.z == pos.z)
+        {
+            return dist;
+        }else
+        {
+            return 999;
+        }
+
+    }
 	
 	private void createMoveToState() {
 		moveToState = (fsm, gameObj) => {
@@ -102,7 +130,7 @@ public sealed class GoapAgent : MonoBehaviour {
 			}
 
 			// get the agent to move itself
-			if ( dataProvider.moveAgent(action) ) {
+			if ( dataProvider.moveAgent(action) || checkDist(action.target.transform.position) == 999) {
 				fsm.popState();
 			}
 
@@ -150,6 +178,13 @@ public sealed class GoapAgent : MonoBehaviour {
 				// perform the next action
 				action = currentActions.Peek();
 				bool inRange = action.requiresInRange() ? action.isInRange() : true;
+                
+                if(checkDist(action.target.transform.position) > 800 && action.requiresInRange())
+                {
+                    fsm.popState();
+                    fsm.pushState(idleState);
+                    dataProvider.planAborted(action);
+                }
 
 				if ( inRange ) {
 					// we are in range, so perform the action

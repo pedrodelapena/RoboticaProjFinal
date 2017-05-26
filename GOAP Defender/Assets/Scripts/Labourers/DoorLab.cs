@@ -8,7 +8,7 @@ public class DoorLab : Labourer {
 
     void Awake()
     {
-        hp = 10;
+        //hp = 10;
         //god = GameObject.FindGameObjectWithTag("God").GetComponent<God>();
     }
 

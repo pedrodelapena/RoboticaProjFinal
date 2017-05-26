@@ -43,6 +43,8 @@ public abstract class Labourer : MonoBehaviour, IGoap
         worldData.Add(new KeyValuePair<string, object>("Free path", (!god.doorStates[0] || !god.doorStates[1] || !god.doorStates[2] || !god.doorStates[3])));
         worldData.Add(new KeyValuePair<string, object>("Wood in box", god.wood > 0));
         worldData.Add(new KeyValuePair<string, object>("Ore in box", god.ore > 0));
+        worldData.Add(new KeyValuePair<string, object>("Has sword", god.Sword > 0));
+
         if (gameObject.GetComponent<BS_GOAP>())
         {
             BS_GOAP bs = gameObject.GetComponent<BS_GOAP>();
@@ -100,7 +102,9 @@ public abstract class Labourer : MonoBehaviour, IGoap
 
 	public bool moveAgent(GoapAction nextAction) {
         // move towards the NextAction's target
-        gameObject.GetComponent<GoapAgent>().createIdleState();
+        //gameObject.GetComponent<GoapAgent>().createIdleState();
+
+        Dictionary<string, float> targetsDist = gego.getObjectsDist();
         gego.goTo(nextAction.target.transform);
         gego.setSpeed(moveSpeed);
 		
