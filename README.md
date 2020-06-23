@@ -1,9 +1,3 @@
-# Projeto Final de Robótica
+# GOAP Defender
 
-# Membros:
-
-## Hugo Mendes
-
-## Jean Luca
-
-## Pedro de la Peña
+Group members: Hugo Mendes, Jean Luca, Pedro de la Peña
